@@ -1,4 +1,4 @@
-// script.js
+// app.js
 const heritageImage = document.getElementById('heritage-image');
 const questionText = document.getElementById('question-text');
 const choicesArea = document.getElementById('choices-area');
