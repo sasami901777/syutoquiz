@@ -3,32 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>世界遺産クイズ</title>
-    <link rel="stylesheet" href="style.css">
+    <title>世界遺産クイズ PWA</title>
+    
+    <!-- Web App Manifest のリンクを相対パスに変更 -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- スタイルシートのリンク -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <h1>世界遺産クイズ</h1>
 
         <div id="quiz-area">
+            <!-- 世界遺産の画像が表示される -->
             <img id="heritage-image" src="" alt="世界遺産">
+            <!-- クイズの質問文が表示される -->
             <p id="question-text"></p>
         </div>
 
         <div id="choices-area">
-            </div>
+            <!-- 選択肢ボタンがJavaScriptで生成されてここに追加される -->
+        </div>
 
+        <!-- 正誤のフィードバックメッセージが表示される -->
         <p id="feedback-message"></p>
         
+        <!-- 解説エリア (最初は非表示) -->
         <div id="explanation-area" style="display: none;">
             <h2>解説</h2>
             <p id="heritage-name"></p>
             <p id="heritage-description"></p>
         </div>
 
+        <!-- 次の問題へ進むボタン (最初は非表示) -->
         <button id="next-question" style="display: none;">次の問題</button>
     </div>
 
-    <script src="script.js"></script>
+    <!-- アプリのロジックを読み込み -->
+    <script src="app.js"></script>
+
+    <!-- Service Worker の登録 -->
+    <script>
+        // Service Worker が利用可能かチェック
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                // Service Worker のパスを相対パス 'sw.js' に変更済み
+                // PWAはHTTPSまたはlocalhostでの動作が必要なため、
+                // file://プロトコルや一部のサンドボックス環境では動作しない場合があります。
+                navigator.serviceWorker.register('sw.js') 
+                    .then(registration => {
+                        console.log('Service Worker 登録成功:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.error('Service Worker 登録失敗:', error);
+                    });
+            });
+        }
+    </script>
 </body>
 </html>
