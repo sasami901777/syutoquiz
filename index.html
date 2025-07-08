@@ -5,58 +5,454 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>世界遺産クイズ PWA</title>
     
-    <!-- Web App Manifest のリンクを相対パスに変更 -->
-    <link rel="manifest" href="manifest.json">
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="data:application/json;base64,ewogICAgIm5hbWUiOiAi5LiW55WM6YGa55Sj44Kv44Kk44K6IFBXQSIsCiAgICAic2hvcnRfbmFtZSI6ICLpgaHkuqnjgq/jgqTjgrAiLAogICAgImRlc2NyaXB0aW9uIjogIuS4lueVjOmBqeeUo+OBruWGmeecn+OCkuimi+OBpuWbveWQjeOCkuW9k+OBpuOCi+OCr+OCpOOCuuOCouODl+ODquOBp+OBmeOAgiIsCiAgICAic3RhcnRfdXJsIjogIi8iLAogICAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgICAiYmFja2dyb3VuZF9jb2xvciI6ICIjZWVmMmY3IiwKICAgICJ0aGVtZV9jb2xvciI6ICIjMDA1NmIzIiwKICAgICJpY29ucyI6IFsKICAgICAgICB7CiAgICAgICAgICAgICJzcmMiOiAiaHR0cHM6Ly9wbGFjZWhvbGQuY28vNzJ4NzIvMDA1NmIzL2ZmZmZmZj90ZXh0PVF1aXoiLAogICAgICAgICAgICAic2l6ZXMiOiAiNzJ4NzIiLAogICAgICAgICAgICAidHlwZSI6ICJpbWFnZS9wbmciCiAgICAgICAgfSwKICAgICAgICB7CiAgICAgICAgICAgICJzcmMiOiAiaHR0cHM6Ly9wbGFjZWhvbGQuY28vMTkyeDE5Mi8wMDU2YjMvZmZmZmZmP3RleHQ9UXVpeiIsCiAgICAgICAgICAgICJzaXplcyI6ICIxOTJ4MTkyIiwKICAgICAgICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgICAgIH0sCiAgICAgICAgewogICAgICAgICAgICAic3JjIjogImh0dHBzOi8vcGxhY2Vob2xkLmNvLzUxMng1MTIvMDA1NmIzL2ZmZmZmZj90ZXh0PVF1aXoiLAogICAgICAgICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICAgICAgICJ0eXBlIjogImltYWdlL3BuZyIKICAgICAgICB9CiAgICBdCn0=">
     
-    <!-- スタイルシートのリンク -->
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #eef2f7;
+            margin: 0;
+            color: #333;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 700px;
+            box-sizing: border-box;
+        }
+        h1 {
+            color: #0056b3;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+        #quiz-area {
+            margin-bottom: 30px;
+        }
+        #heritage-image {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        #question-text {
+            font-size: 1.2em;
+            color: #555;
+            margin-bottom: 25px;
+        }
+        #choices-area {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .choice-button {
+            flex: 1 1 calc(50% - 20px);
+            max-width: calc(50% - 10px);
+            padding: 12px 15px;
+            background-color: #f0f0f0;
+            color: #333;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        .choice-button:hover {
+            background-color: #e0e0e0;
+            transform: translateY(-2px);
+        }
+        .choice-button:active {
+            transform: translateY(0);
+        }
+        .choice-button.correct-answer {
+            background-color: #d4edda;
+            border-color: #28a745;
+            color: #28a745;
+        }
+        .choice-button.wrong-answer {
+            background-color: #f8d7da;
+            border-color: #dc3545;
+            color: #dc3545;
+        }
+        .choice-button:disabled {
+            cursor: not-allowed;
+            opacity: 0.8;
+        }
+        #feedback-message {
+            margin-top: 25px;
+            font-weight: bold;
+            font-size: 1.1em;
+            min-height: 25px;
+        }
+        #feedback-message.correct {
+            color: #28a745;
+        }
+        #feedback-message.incorrect {
+            color: #dc3545;
+        }
+        #explanation-area {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            text-align: left;
+        }
+        #explanation-area h2 {
+            color: #0056b3;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        #heritage-name {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        #heritage-description {
+            font-size: 0.95em;
+            line-height: 1.6;
+            color: #555;
+        }
+        #next-question {
+            padding: 12px 25px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 25px;
+        }
+        #next-question:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+        #restart-button {
+            padding: 12px 25px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 25px;
+            margin-left: 10px;
+        }
+        #restart-button:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+            .choice-button {
+                flex: 1 1 calc(100% - 20px);
+                max-width: calc(100% - 20px);
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <h1>世界遺産クイズ</h1>
-
         <div id="quiz-area">
-            <!-- 世界遺産の画像が表示される -->
             <img id="heritage-image" src="" alt="世界遺産">
-            <!-- クイズの質問文が表示される -->
             <p id="question-text"></p>
         </div>
-
         <div id="choices-area">
-            <!-- 選択肢ボタンがJavaScriptで生成されてここに追加される -->
         </div>
-
-        <!-- 正誤のフィードバックメッセージが表示される -->
         <p id="feedback-message"></p>
         
-        <!-- 解説エリア (最初は非表示) -->
         <div id="explanation-area" style="display: none;">
             <h2>解説</h2>
             <p id="heritage-name"></p>
             <p id="heritage-description"></p>
         </div>
-
-        <!-- 次の問題へ進むボタン (最初は非表示) -->
         <button id="next-question" style="display: none;">次の問題</button>
+        <button id="restart-button" style="display: none;">もう一度</button>
     </div>
 
-    <!-- アプリのロジックを読み込み -->
-    <script src="app.js"></script>
-
-    <!-- Service Worker の登録 -->
     <script>
-        // Service Worker が利用可能かチェック
+        const heritageImage = document.getElementById('heritage-image');
+        const questionText = document.getElementById('question-text');
+        const choicesArea = document.getElementById('choices-area');
+        const feedbackMessage = document.getElementById('feedback-message');
+        const explanationArea = document.getElementById('explanation-area');
+        const heritageName = document.getElementById('heritage-name');
+        const heritageDescription = document.getElementById('heritage-description');
+        const nextButton = document.getElementById('next-question');
+        const restartButton = document.getElementById('restart-button');
+
+        // 世界遺産のデータ
+        const worldHeritageData = [
+            {
+                name: "富士山-信仰の対象と芸術の源泉",
+                country: "日本",
+                imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Mount_Fuji_from_Lake_Kawaguchiko%2C_Yamanashi_Prefecture%2C_Japan.jpg/640px-Mount_Fuji_from_Lake_Kawaguchiko%2C_Yamanashi_Prefecture%2C_Japan.jpg",
+                description: "日本最高峰の山であり、古くから信仰の対象とされ、多くの芸術作品の題材となってきました。その美しい姿は日本の象徴とされています。"
+            },
+            {
+                name: "万里の長城",
+                country: "中国",
+                imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/The_Great_Wall_of_China_at_Jinshanling-edit.jpg/640px-The_Great_Wall_of_China_at_Jinshanling-edit.jpg",
+                description: "紀元前から建設が始まり、歴代王朝によって増改築が繰り返された巨大な城壁。異民族の侵入を防ぐために築かれました。"
+            },
+            {
+                name: "エッフェル塔",
+                country: "フランス",
+                imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Eiffel_Tower_from_Champs_de_Mars%2C_Paris%2C_France.jpg/640px-Eiffel_Tower_from_Champs_de_Mars%2C_Paris%2C_France.jpg",
+                description: "パリの象徴であり、1889年のパリ万国博覧会のために建設された鉄骨構造の塔。セーヌ河岸の世界遺産の一部です。"
+            },
+            {
+                name: "コロッセオ",
+                country: "イタリア",
+                imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/640px-Colosseo_2020.jpg",
+                description: "古代ローマ時代に建設された円形闘技場。剣闘士の試合や公開処刑などが行われ、ローマ帝国の威厳を象徴しています。"
+            },
+            {
+                name: "タージ・マハル",
+                country: "インド",
+                imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Taj_Mahal%2C_Agra%2C_India_-_Diliff.jpg/640px-Taj_Mahal%2C_Agra%2C_India_-_Diliff.jpg",
+                description: "ムガル帝国第5代皇帝シャー・ジャハーンが、愛妃ムムターズ・マハルのために建設した白亜の霊廟。イスラム建築の最高傑作と評されます。"
+            },
+            {
+                name: "マチュ・ピチュの歴史保護区",
+                country: "ペルー",
+                imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Machu_Picchu%2C_Peru.jpg/640px-Machu_Picchu%2C_Peru.jpg",
+                description: "インカ帝国の空中都市として知られる遺跡。アンデス山脈の標高2,430mの尾根に位置し、その建築技術と景観は世界を魅了します。"
+            },
+            {
+                name: "ギザのピラミッド",
+                country: "エジプト",
+                imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/All_Gizah_Pyramids.jpg/640px-All_Gizah_Pyramids.jpg",
+                description: "古代エジプトのファラオの墓として建設された巨大な石造建築物。クフ王のピラミッドは、古代世界の七不思議の一つです。"
+            },
+            {
+                name: "サグラダ・ファミリア",
+                country: "スペイン",
+                imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Sagrada_Familia_from_the_south_2019_01.jpg/640px-Sagrada_Familia_from_the_south_2019_01.jpg",
+                description: "アントニ・ガウディが設計した未完の教会。独特の建築様式と壮大なスケールで知られ、バルセロナの象徴です。"
+            },
+            {
+                name: "自由の女神像",
+                country: "アメリカ合衆国",
+                imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Statue_of_Liberty_7.jpg/640px-Statue_of_Liberty_7.jpg",
+                description: "アメリカ合衆国の独立100周年を記念してフランスから贈られた像。自由と民主主義の象徴として知られています。"
+            },
+            {
+                name: "ストーンヘンジ",
+                country: "イギリス",
+                imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Stonehenge_from_the_north.jpg/640px-Stonehenge_from_the_north.jpg",
+                description: "新石器時代から青銅器時代にかけて建設された巨大な石の建造物。その目的はいまだ謎に包まれていますが、古代の天文観測所や儀式場であったと考えられています。"
+            },
+            {
+                name: "ヴェネツィアとその潟",
+                country: "イタリア",
+                imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Venice_-_Grand_Canal_and_San_Giorgio_Maggiore.jpg/640px-Venice_-_Grand_Canal_and_San_Giorgio_Maggiore.jpg",
+                description: "運河と橋で結ばれた美しい水の都。独自の歴史と文化、芸術が息づく都市景観は世界中の人々を魅了します。"
+            },
+            {
+                name: "イースター島のラパ・ヌイ国立公園",
+                country: "チリ",
+                imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Moai_Rano_Raraku.jpg/640px-Moai_Rano_Raraku.jpg",
+                description: "太平洋に浮かぶ孤島に点在する巨大な石像「モアイ」で知られる国立公園。その起源や建造方法は未だ多くの謎に包まれています。"
+            }
+        ];
+
+        const QUIZ_LIMIT = 10;
+        let currentQuestionCount = 0;
+        let availableHeritageIndices = [];
+        let currentHeritage = null;
+        let correctAnswers = 0;
+
+        // 配列をシャッフルするユーティリティ関数
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        // ランダムな世界遺産を取得（選択肢生成用）
+        function getRandomHeritage() {
+            return worldHeritageData[Math.floor(Math.random() * worldHeritageData.length)];
+        }
+
+        // クイズを初期化
+        function initializeQuiz() {
+            currentQuestionCount = 0;
+            correctAnswers = 0;
+            availableHeritageIndices = Array.from({ length: worldHeritageData.length }, (_, i) => i);
+            shuffleArray(availableHeritageIndices);
+            generateQuestion();
+        }
+
+        // 次の世界遺産を取得
+        function getNextHeritage() {
+            if (availableHeritageIndices.length === 0) {
+                return null;
+            }
+            const nextIndex = availableHeritageIndices.pop();
+            return worldHeritageData[nextIndex];
+        }
+
+        // 国名の選択肢を生成
+        function generateCountryChoices(correctCountry) {
+            let choices = [correctCountry];
+            while (choices.length < 4) {
+                const randomHeritage = getRandomHeritage();
+                const choiceToAdd = randomHeritage.country;
+                if (!choices.includes(choiceToAdd)) {
+                    choices.push(choiceToAdd);
+                }
+            }
+            shuffleArray(choices);
+            return choices;
+        }
+
+        // 新しい問題を生成
+        function generateQuestion() {
+            if (currentQuestionCount >= QUIZ_LIMIT) {
+                endQuiz();
+                return;
+            }
+
+            currentQuestionCount++;
+
+            feedbackMessage.textContent = '';
+            feedbackMessage.className = '';
+            choicesArea.innerHTML = '';
+            explanationArea.style.display = 'none';
+            nextButton.style.display = 'none';
+            restartButton.style.display = 'none';
+
+            currentHeritage = getNextHeritage();
+            if (!currentHeritage) {
+                questionText.textContent = '問題の生成に失敗しました。';
+                return;
+            }
+
+            questionText.textContent = `第 ${currentQuestionCount} 問: この世界遺産がある国はどこ？`;
+            heritageImage.src = currentHeritage.imageUrl;
+            heritageImage.alt = currentHeritage.name;
+
+            const choices = generateCountryChoices(currentHeritage.country);
+
+            choices.forEach(choice => {
+                const button = document.createElement('button');
+                button.textContent = choice;
+                button.classList.add('choice-button');
+                button.addEventListener('click', () => checkAnswer(choice, currentHeritage.country, button));
+                choicesArea.appendChild(button);
+            });
+        }
+
+        // 解答をチェック
+        function checkAnswer(selectedAnswer, correctAnswer, clickedButton) {
+            Array.from(choicesArea.children).forEach(button => {
+                button.disabled = true;
+                if (button.textContent === correctAnswer) {
+                    button.classList.add('correct-answer');
+                }
+            });
+
+            if (selectedAnswer === correctAnswer) {
+                correctAnswers++;
+                feedbackMessage.textContent = '🎉 正解です！素晴らしい！';
+                feedbackMessage.classList.add('correct');
+                clickedButton.classList.add('correct-answer');
+            } else {
+                feedbackMessage.textContent = `残念、不正解です。正解は「${correctAnswer}」でした。`;
+                feedbackMessage.classList.add('incorrect');
+                clickedButton.classList.add('wrong-answer');
+            }
+
+            heritageName.textContent = currentHeritage.name;
+            heritageDescription.textContent = currentHeritage.description;
+            explanationArea.style.display = 'block';
+
+            nextButton.style.display = 'block';
+            nextButton.textContent = (currentQuestionCount < QUIZ_LIMIT) ? '次の問題' : 'クイズ終了';
+        }
+
+        // クイズを終了
+        function endQuiz() {
+            questionText.textContent = `クイズ終了！お疲れ様でした！\n正解数: ${correctAnswers}/${QUIZ_LIMIT}`;
+            heritageImage.src = '';
+            heritageImage.alt = '';
+            choicesArea.innerHTML = '';
+            feedbackMessage.textContent = '';
+            explanationArea.style.display = 'none';
+            nextButton.style.display = 'none';
+            restartButton.style.display = 'inline-block';
+        }
+
+        // イベントリスナーの設定
+        nextButton.addEventListener('click', generateQuestion);
+        restartButton.addEventListener('click', initializeQuiz);
+
+        // ページ読み込み時にクイズを初期化
+        document.addEventListener('DOMContentLoaded', initializeQuiz);
+
+        // Service Worker の登録（簡略化版）
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                // Service Worker のパスを相対パス 'sw.js' に変更済み
-                // PWAはHTTPSまたはlocalhostでの動作が必要なため、
-                // file://プロトコルや一部のサンドボックス環境では動作しない場合があります。
-                navigator.serviceWorker.register('sw.js') 
-                    .then(registration => {
+                const swCode = `
+                    const CACHE_NAME = 'world-heritage-quiz-v1';
+                    const urlsToCache = [
+                        '/',
+                        '/index.html'
+                    ];
+
+                    self.addEventListener('install', (event) => {
+                        event.waitUntil(
+                            caches.open(CACHE_NAME)
+                                .then((cache) => {
+                                    return cache.addAll(urlsToCache);
+                                })
+                        );
+                    });
+
+                    self.addEventListener('fetch', (event) => {
+                        event.respondWith(
+                            caches.match(event.request)
+                                .then((response) => {
+                                    return response || fetch(event.request);
+                                })
+                        );
+                    });
+                `;
+                
+                const blob = new Blob([swCode], { type: 'application/javascript' });
+                const swUrl = URL.createObjectURL(blob);
+                
+                navigator.serviceWorker.register(swUrl)
+                    .then((registration) => {
                         console.log('Service Worker 登録成功:', registration.scope);
                     })
-                    .catch(error => {
-                        console.error('Service Worker 登録失敗:', error);
+                    .catch((error) => {
+                        console.log('Service Worker 登録失敗:', error);
                     });
             });
         }
