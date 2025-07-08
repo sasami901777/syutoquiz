@@ -84,6 +84,66 @@ const worldHeritageData = [
         imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Moai_Rano_Raraku.jpg/640px-Moai_Rano_Raraku.jpg",
         description: "太平洋に浮かぶ孤島に点在する巨大な石像「モアイ」で知られる国立公園。その起源や建造方法は未だ多くの謎に包まれています。"
     }
+     {
+        name: "グランド・キャニオン国立公園",
+        country: "アメリカ合衆国",
+        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Grand_Canyon_from_Mather_Point.jpg/640px-Grand_Canyon_from_Mather_Point.jpg",
+        description: "コロラド高原を流れるコロラド川が形成した、雄大な渓谷。地球の歴史を物語る地層が露出しており、その壮大な景観は世界中の人々を魅了します。"
+    },
+    {
+        name: "アクロポリス",
+        country: "ギリシャ",
+        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Parthenon_from_Propylaea.jpg/640px-Parthenon_from_Propylaea.jpg",
+        description: "アテネの中心部にある小高い丘で、古代ギリシャの代表的な建築物であるパルテノン神殿などが建ち並びます。民主主義発祥の地としても知られています。"
+    },
+    {
+        name: "シュリー・ランガナータスワーミ寺院", // インドの代表的な寺院
+        country: "インド",
+        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Sri_Ranganathaswamy_Temple_Gopuram.jpg/640px-Sri_Ranganathaswamy_Temple_Gopuram.jpg",
+        description: "インド最大のヒンドゥー教寺院複合体の一つで、その壮大なゴープラム（塔門）と美しい彫刻で知られています。南インドの建築様式を代表する存在です。"
+    },
+    {
+        name: "ケルン大聖堂",
+        country: "ドイツ",
+        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Cologne_Cathedral_from_the_Rhine.jpg/640px-Cologne_Cathedral_from_the_Rhine.jpg",
+        description: "ドイツのケルンにあるゴシック様式の大聖堂。その壮麗な建築と、聖遺物を納めるために建設された歴史的背景を持つ、ドイツを代表する建築物です。"
+    },
+    {
+        name: "モン・サン＝ミシェルとその湾",
+        country: "フランス",
+        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Mont_Saint-Michel_at_dawn.jpg/640px-Mont_Saint-Michel_at_dawn.jpg",
+        description: "フランス北西部の海岸に浮かぶ岩山に築かれた修道院。潮の満ち引きによって陸と隔絶される神秘的な景観は、「西洋の驚異」と称されます。"
+    },
+    {
+        name: "シドニー・オペラハウス",
+        country: "オーストラリア",
+        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Sydney_Opera_House_-_Dec_2008.jpg/640px-Sydney_Opera_House_-_Dec_2008.jpg",
+        description: "シドニーの象徴的な建造物であり、20世紀を代表する建築物の一つ。貝殻のような独特の屋根が特徴で、世界的に有名なコンサートホールです。"
+    },
+    {
+        name: "古都京都の文化財",
+        country: "日本",
+        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Kinkaku-ji_in_Kyoto.jpg/640px-Kinkaku-ji_in_Kyoto.jpg",
+        description: "古くから日本の首都として栄えた京都には、金閣寺や清水寺など、数多くの歴史的建造物や庭園が残されています。日本の伝統文化の粋を集めた場所です。"
+    },
+    {
+        name: "ポンペイ、エルコラーノおよびトッレ・アヌンツィアータの考古地域",
+        country: "イタリア",
+        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Pompeii_Forum_Vesuvius.jpg/640px-Pompeii_Forum_Vesuvius.jpg",
+        description: "西暦79年のヴェスヴィオ火山噴火によって埋没した古代都市ポンペイ。当時のローマ帝国の生活様式がそのまま保存されており、貴重な考古学的資料となっています。"
+    },
+    {
+        name: "イグアス国立公園",
+        country: "ブラジル",
+        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Iguazu_Falls_from_Brazil_side.jpg/640px-Iguazu_Falls_from_Brazil_side.jpg",
+        description: "アルゼンチンとの国境に位置する世界最大級の滝、イグアスの滝を中心とした国立公園。その圧倒的な水量と雄大な自然は圧巻です。"
+    },
+    {
+        name: "アブ・シンベルからフィラエまでのヌビア遺跡群",
+        country: "エジプト",
+        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Abu_Simbel_Temple_Egypt.jpg/640px-Abu_Simbel_Temple_Egypt.jpg",
+        description: "ナイル川沿いに点在する古代エジプトの壮大な岩窟神殿群。アスワン・ハイ・ダム建設時に水没の危機に瀕したが、国際的な協力によって移築・保存されました。"
+    }
     // さらに多くの世界遺産を追加してください
 ];
 
