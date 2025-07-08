@@ -204,78 +204,126 @@
         const nextButton = document.getElementById('next-question');
         const restartButton = document.getElementById('restart-button');
 
-        // 世界遺産のデータ
+        // 世界遺産のデータ（複数の画像URLを用意）
         const worldHeritageData = [
             {
                 name: "富士山-信仰の対象と芸術の源泉",
                 country: "日本",
-                imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Mount_Fuji_from_Lake_Kawaguchiko%2C_Yamanashi_Prefecture%2C_Japan.jpg/640px-Mount_Fuji_from_Lake_Kawaguchiko%2C_Yamanashi_Prefecture%2C_Japan.jpg",
+                imageUrls: [
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Views_of_Mount_Fuji_from_Kawaguchi_Lake.jpg/640px-Views_of_Mount_Fuji_from_Kawaguchi_Lake.jpg",
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Mount_Fuji_from_Lake_Kawaguchiko%2C_Yamanashi_Prefecture%2C_Japan.jpg/640px-Mount_Fuji_from_Lake_Kawaguchiko%2C_Yamanashi_Prefecture%2C_Japan.jpg",
+                    "https://picsum.photos/640/480?random=1"
+                ],
                 description: "日本最高峰の山であり、古くから信仰の対象とされ、多くの芸術作品の題材となってきました。その美しい姿は日本の象徴とされています。"
             },
             {
                 name: "万里の長城",
                 country: "中国",
-                imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/The_Great_Wall_of_China_at_Jinshanling-edit.jpg/640px-The_Great_Wall_of_China_at_Jinshanling-edit.jpg",
+                imageUrls: [
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/The_Great_Wall_of_China_at_Jinshanling-edit.jpg/640px-The_Great_Wall_of_China_at_Jinshanling-edit.jpg",
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Greatwall_large.jpg/640px-Greatwall_large.jpg",
+                    "https://picsum.photos/640/480?random=2"
+                ],
                 description: "紀元前から建設が始まり、歴代王朝によって増改築が繰り返された巨大な城壁。異民族の侵入を防ぐために築かれました。"
             },
             {
                 name: "エッフェル塔",
                 country: "フランス",
-                imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Eiffel_Tower_from_Champs_de_Mars%2C_Paris%2C_France.jpg/640px-Eiffel_Tower_from_Champs_de_Mars%2C_Paris%2C_France.jpg",
+                imageUrls: [
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Eiffel_Tower_from_Champs_de_Mars%2C_Paris%2C_France.jpg/640px-Eiffel_Tower_from_Champs_de_Mars%2C_Paris%2C_France.jpg",
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Tour_Eiffel_Wikimedia_Commons.jpg/640px-Tour_Eiffel_Wikimedia_Commons.jpg",
+                    "https://picsum.photos/640/480?random=3"
+                ],
                 description: "パリの象徴であり、1889年のパリ万国博覧会のために建設された鉄骨構造の塔。セーヌ河岸の世界遺産の一部です。"
             },
             {
                 name: "コロッセオ",
                 country: "イタリア",
-                imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/640px-Colosseo_2020.jpg",
+                imageUrls: [
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/640px-Colosseo_2020.jpg",
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Colosseum_in_Rome%2C_Italy_-_April_2007.jpg/640px-Colosseum_in_Rome%2C_Italy_-_April_2007.jpg",
+                    "https://picsum.photos/640/480?random=4"
+                ],
                 description: "古代ローマ時代に建設された円形闘技場。剣闘士の試合や公開処刑などが行われ、ローマ帝国の威厳を象徴しています。"
             },
             {
                 name: "タージ・マハル",
                 country: "インド",
-                imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Taj_Mahal%2C_Agra%2C_India_-_Diliff.jpg/640px-Taj_Mahal%2C_Agra%2C_India_-_Diliff.jpg",
+                imageUrls: [
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Taj_Mahal%2C_Agra%2C_India_-_Diliff.jpg/640px-Taj_Mahal%2C_Agra%2C_India_-_Diliff.jpg",
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Taj_Mahal_in_March_2004.jpg/640px-Taj_Mahal_in_March_2004.jpg",
+                    "https://picsum.photos/640/480?random=5"
+                ],
                 description: "ムガル帝国第5代皇帝シャー・ジャハーンが、愛妃ムムターズ・マハルのために建設した白亜の霊廟。イスラム建築の最高傑作と評されます。"
             },
             {
                 name: "マチュ・ピチュの歴史保護区",
                 country: "ペルー",
-                imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Machu_Picchu%2C_Peru.jpg/640px-Machu_Picchu%2C_Peru.jpg",
+                imageUrls: [
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Machu_Picchu%2C_Peru.jpg/640px-Machu_Picchu%2C_Peru.jpg",
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Machu_Picchu%2C_Peru_%282018%29.jpg/640px-Machu_Picchu%2C_Peru_%282018%29.jpg",
+                    "https://picsum.photos/640/480?random=6"
+                ],
                 description: "インカ帝国の空中都市として知られる遺跡。アンデス山脈の標高2,430mの尾根に位置し、その建築技術と景観は世界を魅了します。"
             },
             {
                 name: "ギザのピラミッド",
                 country: "エジプト",
-                imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/All_Gizah_Pyramids.jpg/640px-All_Gizah_Pyramids.jpg",
+                imageUrls: [
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/All_Gizah_Pyramids.jpg/640px-All_Gizah_Pyramids.jpg",
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Kheops-Pyramid.jpg/640px-Kheops-Pyramid.jpg",
+                    "https://picsum.photos/640/480?random=7"
+                ],
                 description: "古代エジプトのファラオの墓として建設された巨大な石造建築物。クフ王のピラミッドは、古代世界の七不思議の一つです。"
             },
             {
                 name: "サグラダ・ファミリア",
                 country: "スペイン",
-                imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Sagrada_Familia_from_the_south_2019_01.jpg/640px-Sagrada_Familia_from_the_south_2019_01.jpg",
+                imageUrls: [
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Sagrada_Familia_from_the_south_2019_01.jpg/640px-Sagrada_Familia_from_the_south_2019_01.jpg",
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Sagrada_Familia_nave.jpg/640px-Sagrada_Familia_nave.jpg",
+                    "https://picsum.photos/640/480?random=8"
+                ],
                 description: "アントニ・ガウディが設計した未完の教会。独特の建築様式と壮大なスケールで知られ、バルセロナの象徴です。"
             },
             {
                 name: "自由の女神像",
                 country: "アメリカ合衆国",
-                imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Statue_of_Liberty_7.jpg/640px-Statue_of_Liberty_7.jpg",
+                imageUrls: [
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Statue_of_Liberty_7.jpg/640px-Statue_of_Liberty_7.jpg",
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Statue_of_Liberty%2C_New_York.jpg/640px-Statue_of_Liberty%2C_New_York.jpg",
+                    "https://picsum.photos/640/480?random=9"
+                ],
                 description: "アメリカ合衆国の独立100周年を記念してフランスから贈られた像。自由と民主主義の象徴として知られています。"
             },
             {
                 name: "ストーンヘンジ",
                 country: "イギリス",
-                imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Stonehenge_from_the_north.jpg/640px-Stonehenge_from_the_north.jpg",
+                imageUrls: [
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Stonehenge_from_the_north.jpg/640px-Stonehenge_from_the_north.jpg",
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Stonehenge2007_07_30.jpg/640px-Stonehenge2007_07_30.jpg",
+                    "https://picsum.photos/640/480?random=10"
+                ],
                 description: "新石器時代から青銅器時代にかけて建設された巨大な石の建造物。その目的はいまだ謎に包まれていますが、古代の天文観測所や儀式場であったと考えられています。"
             },
             {
                 name: "ヴェネツィアとその潟",
                 country: "イタリア",
-                imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Venice_-_Grand_Canal_and_San_Giorgio_Maggiore.jpg/640px-Venice_-_Grand_Canal_and_San_Giorgio_Maggiore.jpg",
+                imageUrls: [
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Venice_-_Grand_Canal_and_San_Giorgio_Maggiore.jpg/640px-Venice_-_Grand_Canal_and_San_Giorgio_Maggiore.jpg",
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Venice_-_St_Mark%27s_Square.jpg/640px-Venice_-_St_Mark%27s_Square.jpg",
+                    "https://picsum.photos/640/480?random=11"
+                ],
                 description: "運河と橋で結ばれた美しい水の都。独自の歴史と文化、芸術が息づく都市景観は世界中の人々を魅了します。"
             },
             {
                 name: "イースター島のラパ・ヌイ国立公園",
                 country: "チリ",
-                imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Moai_Rano_Raraku.jpg/640px-Moai_Rano_Raraku.jpg",
+                imageUrls: [
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Moai_Rano_Raraku.jpg/640px-Moai_Rano_Raraku.jpg",
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Moai_facing_inland_at_Ahu_Tongariki.jpg/640px-Moai_facing_inland_at_Ahu_Tongariki.jpg",
+                    "https://picsum.photos/640/480?random=12"
+                ],
                 description: "太平洋に浮かぶ孤島に点在する巨大な石像「モアイ」で知られる国立公園。その起源や建造方法は未だ多くの謎に包まれています。"
             }
         ];
@@ -331,6 +379,33 @@
             return choices;
         }
 
+        // 画像を読み込む関数（複数のURLを試す）
+        function loadImageWithFallback(imageUrls, imageElement) {
+            let currentIndex = 0;
+            
+            function tryLoadImage() {
+                if (currentIndex >= imageUrls.length) {
+                    // 全てのURLが失敗した場合、プレースホルダー画像を表示
+                    imageElement.src = 'https://via.placeholder.com/640x480/0056b3/ffffff?text=世界遺産';
+                    imageElement.alt = '画像を読み込めませんでした';
+                    return;
+                }
+                
+                const img = new Image();
+                img.onload = function() {
+                    imageElement.src = imageUrls[currentIndex];
+                    imageElement.alt = currentHeritage.name;
+                };
+                img.onerror = function() {
+                    currentIndex++;
+                    tryLoadImage();
+                };
+                img.src = imageUrls[currentIndex];
+            }
+            
+            tryLoadImage();
+        }
+
         // 新しい問題を生成
         function generateQuestion() {
             if (currentQuestionCount >= QUIZ_LIMIT) {
@@ -354,8 +429,9 @@
             }
 
             questionText.textContent = `第 ${currentQuestionCount} 問: この世界遺産がある国はどこ？`;
-            heritageImage.src = currentHeritage.imageUrl;
-            heritageImage.alt = currentHeritage.name;
+            
+            // 画像を読み込み（複数のURLを試す）
+            loadImageWithFallback(currentHeritage.imageUrls, heritageImage);
 
             const choices = generateCountryChoices(currentHeritage.country);
 
