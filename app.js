@@ -97,24 +97,6 @@ const worldHeritageData = [
         description: "古くから日本の首都として栄えた京都には、金閣寺や清水寺など、数多くの歴史的建造物や庭園が残されています。日本の伝統文化の粋を集めた場所です。"
     },
     {
-        name: "ポンペイ、エルコラーノおよびトッレ・アヌンツィアータの考古地域",
-        country: "イタリア",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Pompeii_Forum_Vesuvius.jpg/640px-Pompeii_Forum_Vesuvius.jpg",
-        description: "西暦79年のヴェスヴィオ火山噴火によって埋没した古代都市ポンペイ。当時のローマ帝国の生活様式がそのまま保存されており、貴重な考古学的資料となっています。"
-    },
-    {
-        name: "イグアス国立公園",
-        country: "ブラジル",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Iguazu_Falls_from_Brazil_side.jpg/640px-Iguazu_Falls_from_Brazil_side.jpg",
-        description: "アルゼンチンとの国境に位置する世界最大級の滝、イグアスの滝を中心とした国立公園。その圧倒的な水量と雄大な自然は圧巻です。"
-    },
-    {
-        name: "アブ・シンベルからフィラエまでのヌビア遺跡群",
-        country: "エジプト",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Abu_Simbel_Temple_Egypt.jpg/640px-Abu_Simbel_Temple_Egypt.jpg",
-        description: "ナイル川沿いに点在する古代エジプトの壮大な岩窟神殿群。アスワン・ハイ・ダム建設時に水没の危機に瀕したが、国際的な協力によって移築・保存されました。"
-    }
-    {
         name: "シュリー・ランガナータスワーミ寺院", // インドの代表的な寺院
         country: "インド",
         imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Sri_Ranganathaswamy_Temple_Gopuram.jpg/640px-Sri_Ranganathaswamy_Temple_Gopuram.jpg",
