@@ -117,7 +117,7 @@ const worldHeritageData = [
     // さらに多くの世界遺産を追加してください
 ];
 
-const QUIZ_LIMIT = 10; // 出題数
+const QUIZ_LIMIT = 5; // 出題数
 let currentQuestionCount = 0; // 現在の出題数
 let availableHeritageIndices = []; // 出題可能な世界遺産のインデックスリスト
 let currentHeritage = null; // 現在の問題の世界遺産
