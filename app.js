@@ -27,7 +27,7 @@ const worldHeritageData = [
     {
         name: "エッフェル塔", // エッフェル塔自体は世界遺産ではないが、パリのセーヌ河岸の一部として登録
         country: "フランス",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Eiffel_Tower_from_Champs_de_Mars%2C_Paris%2C_France.jpg/640px-Eiffel_Tower_from_Champs_de_Mars%2C_Paris%2C_France.jpg",
+        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/a/a8/Tour_Eiffel_Wikimedia_Commons.jpg",
         description: "パリの象徴であり、1889年のパリ万国博覧会のために建設された鉄骨構造の塔。セーヌ河岸の世界遺産の一部です。"
     },
     {
