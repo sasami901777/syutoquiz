@@ -9,191 +9,412 @@
     <link rel="manifest" href="data:application/json;base64,ewogICAgIm5hbWUiOiAi5LiW55WM6YGa55Sj44Kv44Kk44K6IFBXQSIsCiAgICAic2hvcnRfbmFtZSI6ICLpgaHkuqnjgq/jgqTjgrAiLAogICAgImRlc2NyaXB0aW9uIjogIuS4lueVjOmBqeeUo+OBruWGmeecn+OCkuimi+OBpuWbveWQjeOCkuW9k+OBpuOCi+OCr+OCpOOCuuOCouODl+ODquOBp+OBmeOAgiIsCiAgICAic3RhcnRfdXJsIjogIi8iLAogICAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgICAiYmFja2dyb3VuZF9jb2xvciI6ICIjZWVmMmY3IiwKICAgICJ0aGVtZV9jb2xvciI6ICIjMDA1NmIzIiwKICAgICJpY29ucyI6IFsKICAgICAgICB7CiAgICAgICAgICAgICJzcmMiOiAiaHR0cHM6Ly9wbGFjZWhvbGQuY28vNzJ4NzIvMDA1NmIzL2ZmZmZmZj90ZXh0PVF1aXoiLAogICAgICAgICAgICAic2l6ZXMiOiAiNzJ4NzIiLAogICAgICAgICAgICAidHlwZSI6ICJpbWFnZS9wbmciCiAgICAgICAgfSwKICAgICAgICB7CiAgICAgICAgICAgICJzcmMiOiAiaHR0cHM6Ly9wbGFjZWhvbGQuY28vMTkyeDE5Mi8wMDU2YjMvZmZmZmZmP3RleHQ9UXVpeiIsCiAgICAgICAgICAgICJzaXplcyI6ICIxOTJ4MTkyIiwKICAgICAgICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgICAgIH0sCiAgICAgICAgewogICAgICAgICAgICAic3JjIjogImh0dHBzOi8vcGxhY2Vob2xkLmNvLzUxMng1MTIvMDA1NmIzL2ZmZmZmZj90ZXh0PVF1aXoiLAogICAgICAgICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICAgICAgICJ0eXBlIjogImltYWdlL3BuZyIKICAgICAgICB9CiAgICBdCn0=">
     
     <style>
+        * {
+            box-sizing: border-box;
+        }
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: #eef2f7;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             margin: 0;
             color: #333;
+            padding: 20px;
         }
+        
         .container {
-            background-color: #ffffff;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             text-align: center;
-            width: 90%;
-            max-width: 700px;
-            box-sizing: border-box;
+            width: 100%;
+            max-width: 800px;
+            animation: fadeIn 0.5s ease-in;
         }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
         h1 {
             color: #0056b3;
             margin-bottom: 30px;
-            font-size: 2em;
+            font-size: 2.5em;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
+        
         #quiz-area {
             margin-bottom: 30px;
         }
+        
         #heritage-image {
             width: 100%;
-            max-width: 500px;
-            height: auto;
-            border: 1px solid #ddd;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            max-width: 600px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             margin-bottom: 20px;
-            object-fit: contain;
-            border-radius: 8px;
+            transition: transform 0.3s ease;
         }
+        
+        #heritage-image:hover {
+            transform: scale(1.02);
+        }
+        
         #question-text {
-            font-size: 1.2em;
+            font-size: 1.3em;
             color: #555;
             margin-bottom: 25px;
+            font-weight: 500;
         }
+        
         #choices-area {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
         }
+        
         .choice-button {
-            flex: 1 1 calc(50% - 20px);
-            max-width: calc(50% - 10px);
-            padding: 12px 15px;
-            background-color: #f0f0f0;
+            padding: 15px 20px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
             color: #333;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            border: 2px solid #dee2e6;
+            border-radius: 12px;
             cursor: pointer;
-            font-size: 1em;
-            transition: background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
-            box-sizing: border-box;
-            text-align: center;
+            font-size: 1.1em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
+        
+        .choice-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+        
         .choice-button:hover {
-            background-color: #e0e0e0;
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
             transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3);
         }
+        
+        .choice-button:hover::before {
+            left: 100%;
+        }
+        
         .choice-button:active {
             transform: translateY(0);
         }
+        
         .choice-button.correct-answer {
-            background-color: #d4edda;
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
             border-color: #28a745;
-            color: #28a745;
+            animation: correctPulse 0.5s ease;
         }
+        
         .choice-button.wrong-answer {
-            background-color: #f8d7da;
+            background: linear-gradient(135deg, #dc3545, #fd7e14);
+            color: white;
             border-color: #dc3545;
-            color: #dc3545;
+            animation: wrongShake 0.5s ease;
         }
+        
+        @keyframes correctPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes wrongShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
         .choice-button:disabled {
             cursor: not-allowed;
             opacity: 0.8;
         }
+        
         #feedback-message {
             margin-top: 25px;
             font-weight: bold;
-            font-size: 1.1em;
-            min-height: 25px;
+            font-size: 1.2em;
+            min-height: 30px;
+            padding: 15px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
         }
+        
         #feedback-message.correct {
-            color: #28a745;
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
+            color: #155724;
+            border: 2px solid #28a745;
         }
+        
         #feedback-message.incorrect {
-            color: #dc3545;
+            background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+            color: #721c24;
+            border: 2px solid #dc3545;
         }
+        
         #explanation-area {
             margin-top: 30px;
-            padding: 20px;
-            background-color: #f9f9f9;
-            border: 1px solid #eee;
-            border-radius: 8px;
+            padding: 25px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border: 1px solid #dee2e6;
+            border-radius: 15px;
             text-align: left;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
+        
         #explanation-area h2 {
             color: #0056b3;
             font-size: 1.5em;
             margin-bottom: 15px;
             text-align: center;
         }
+        
         #heritage-name {
             font-weight: bold;
-            font-size: 1.1em;
+            font-size: 1.2em;
             margin-bottom: 10px;
             color: #333;
         }
+        
         #heritage-description {
-            font-size: 0.95em;
-            line-height: 1.6;
+            font-size: 1em;
+            line-height: 1.7;
             color: #555;
         }
+        
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .action-button {
+            padding: 12px 30px;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .action-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .action-button:hover::before {
+            left: 100%;
+        }
+        
         #next-question {
-            padding: 12px 25px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1.1em;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            margin-top: 25px;
+            background: linear-gradient(135deg, #007bff, #0056b3);
         }
+        
         #next-question:hover {
-            background-color: #0056b3;
+            background: linear-gradient(135deg, #0056b3, #004085);
             transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 86, 179, 0.3);
         }
+        
         #restart-button {
-            padding: 12px 25px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1.1em;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            margin-top: 25px;
-            margin-left: 10px;
+            background: linear-gradient(135deg, #28a745, #20c997);
         }
+        
         #restart-button:hover {
-            background-color: #218838;
+            background: linear-gradient(135deg, #20c997, #17a2b8);
             transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(32, 201, 151, 0.3);
         }
-        @media (max-width: 600px) {
+        
+        .score-display {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #0056b3;
+            margin: 20px 0;
+            padding: 15px;
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border-radius: 10px;
+            border: 2px solid #2196f3;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #007bff, #0056b3);
+            transition: width 0.5s ease;
+            border-radius: 4px;
+        }
+        
+        @media (max-width: 768px) {
             .container {
                 padding: 25px;
+                margin: 10px;
             }
-            .choice-button {
-                flex: 1 1 calc(100% - 20px);
-                max-width: calc(100% - 20px);
+            
+            h1 {
+                font-size: 2em;
             }
+            
+            #choices-area {
+                grid-template-columns: 1fr;
+            }
+            
+            .button-group {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .action-button {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+        
+        .final-score {
+            font-size: 2em;
+            font-weight: bold;
+            color: #0056b3;
+            margin: 30px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .achievement-badge {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: 600;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+        
+        .badge-gold {
+            background: linear-gradient(135deg, #ffd700, #ffb700);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+        
+        .badge-silver {
+            background: linear-gradient(135deg, #c0c0c0, #a0a0a0);
+            box-shadow: 0 5px 15px rgba(192, 192, 192, 0.3);
+        }
+        
+        .badge-bronze {
+            background: linear-gradient(135deg, #cd7f32, #b8860b);
+            box-shadow: 0 5px 15px rgba(205, 127, 50, 0.3);
+        }
+        
+        .badge-normal {
+            background: linear-gradient(135deg, #6c757d, #495057);
+            box-shadow: 0 5px 15px rgba(108, 117, 125, 0.3);
+        }
+        
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .stat-item {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #0056b3;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>世界遺産クイズ</h1>
+        <h1>🏛️ 世界遺産クイズ</h1>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill"></div>
+        </div>
+        
         <div id="quiz-area">
             <img id="heritage-image" src="" alt="世界遺産">
             <p id="question-text"></p>
         </div>
-        <div id="choices-area">
-        </div>
-        <p id="feedback-message"></p>
+        
+        <div id="choices-area"></div>
+        
+        <div id="feedback-message"></div>
         
         <div id="explanation-area" style="display: none;">
-            <h2>解説</h2>
+            <h2>📚 解説</h2>
             <p id="heritage-name"></p>
             <p id="heritage-description"></p>
         </div>
-        <button id="next-question" style="display: none;">次の問題</button>
-        <button id="restart-button" style="display: none;">もう一度</button>
+        
+        <div class="button-group">
+            <button id="next-question" class="action-button" style="display: none;">次の問題</button>
+            <button id="restart-button" class="action-button" style="display: none;">もう一度</button>
+        </div>
     </div>
 
     <script>
+        // DOM要素の取得
         const heritageImage = document.getElementById('heritage-image');
         const questionText = document.getElementById('question-text');
         const choicesArea = document.getElementById('choices-area');
@@ -203,16 +424,16 @@
         const heritageDescription = document.getElementById('heritage-description');
         const nextButton = document.getElementById('next-question');
         const restartButton = document.getElementById('restart-button');
+        const progressFill = document.getElementById('progress-fill');
 
-        // 世界遺産のデータ（複数の画像URLを用意）
+        // 世界遺産のデータ
         const worldHeritageData = [
             {
                 name: "万里の長城",
                 country: "中国",
                 imageUrls: [
                     "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/The_Great_Wall_of_China_at_Jinshanling-edit.jpg/640px-The_Great_Wall_of_China_at_Jinshanling-edit.jpg",
-                    "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Greatwall_large.jpg/640px-Greatwall_large.jpg",
-                    "https://picsum.photos/640/480?random=2"
+                    "https://picsum.photos/640/480?random=1"
                 ],
                 description: "紀元前から建設が始まり、歴代王朝によって増改築が繰り返された巨大な城壁。異民族の侵入を防ぐために築かれました。"
             },
@@ -221,8 +442,7 @@
                 country: "イタリア",
                 imageUrls: [
                     "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/640px-Colosseo_2020.jpg",
-                    "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Colosseum_in_Rome%2C_Italy_-_April_2007.jpg/640px-Colosseum_in_Rome%2C_Italy_-_April_2007.jpg",
-                    "https://picsum.photos/640/480?random=4"
+                    "https://picsum.photos/640/480?random=2"
                 ],
                 description: "古代ローマ時代に建設された円形闘技場。剣闘士の試合や公開処刑などが行われ、ローマ帝国の威厳を象徴しています。"
             },
@@ -231,18 +451,16 @@
                 country: "インド",
                 imageUrls: [
                     "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Taj_Mahal%2C_Agra%2C_India_-_Diliff.jpg/640px-Taj_Mahal%2C_Agra%2C_India_-_Diliff.jpg",
-                    "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Taj_Mahal_in_March_2004.jpg/640px-Taj_Mahal_in_March_2004.jpg",
-                    "https://picsum.photos/640/480?random=5"
+                    "https://picsum.photos/640/480?random=3"
                 ],
                 description: "ムガル帝国第5代皇帝シャー・ジャハーンが、愛妃ムムターズ・マハルのために建設した白亜の霊廟。イスラム建築の最高傑作と評されます。"
             },
             {
-                name: "マチュ・ピチュの歴史保護区",
+                name: "マチュ・ピチュ",
                 country: "ペルー",
                 imageUrls: [
                     "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Machu_Picchu%2C_Peru.jpg/640px-Machu_Picchu%2C_Peru.jpg",
-                    "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Machu_Picchu%2C_Peru_%282018%29.jpg/640px-Machu_Picchu%2C_Peru_%282018%29.jpg",
-                    "https://picsum.photos/640/480?random=6"
+                    "https://picsum.photos/640/480?random=4"
                 ],
                 description: "インカ帝国の空中都市として知られる遺跡。アンデス山脈の標高2,430mの尾根に位置し、その建築技術と景観は世界を魅了します。"
             },
@@ -251,8 +469,7 @@
                 country: "エジプト",
                 imageUrls: [
                     "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/All_Gizah_Pyramids.jpg/640px-All_Gizah_Pyramids.jpg",
-                    "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Kheops-Pyramid.jpg/640px-Kheops-Pyramid.jpg",
-                    "https://picsum.photos/640/480?random=7"
+                    "https://picsum.photos/640/480?random=5"
                 ],
                 description: "古代エジプトのファラオの墓として建設された巨大な石造建築物。クフ王のピラミッドは、古代世界の七不思議の一つです。"
             },
@@ -261,8 +478,7 @@
                 country: "アメリカ合衆国",
                 imageUrls: [
                     "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Statue_of_Liberty_7.jpg/640px-Statue_of_Liberty_7.jpg",
-                    "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Statue_of_Liberty%2C_New_York.jpg/640px-Statue_of_Liberty%2C_New_York.jpg",
-                    "https://picsum.photos/640/480?random=9"
+                    "https://picsum.photos/640/480?random=6"
                 ],
                 description: "アメリカ合衆国の独立100周年を記念してフランスから贈られた像。自由と民主主義の象徴として知られています。"
             },
@@ -271,25 +487,76 @@
                 country: "イギリス",
                 imageUrls: [
                     "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Stonehenge_from_the_north.jpg/640px-Stonehenge_from_the_north.jpg",
-                    "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Stonehenge2007_07_30.jpg/640px-Stonehenge2007_07_30.jpg",
-                    "https://picsum.photos/640/480?random=10"
+                    "https://picsum.photos/640/480?random=7"
                 ],
                 description: "新石器時代から青銅器時代にかけて建設された巨大な石の建造物。その目的はいまだ謎に包まれていますが、古代の天文観測所や儀式場であったと考えられています。"
             },
+            {
+                name: "グランド・キャニオン",
+                country: "アメリカ合衆国",
+                imageUrls: [
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Grand_Canyon_from_Mather_Point.jpg/640px-Grand_Canyon_from_Mather_Point.jpg",
+                    "https://picsum.photos/640/480?random=8"
+                ],
+                description: "コロラド高原を流れるコロラド川が形成した、雄大な渓谷。地球の歴史を物語る地層が露出しており、その壮大な景観は世界中の人々を魅了します。"
+            },
+            {
+                name: "アクロポリス",
+                country: "ギリシャ",
+                imageUrls: [
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Parthenon_from_Propylaea.jpg/640px-Parthenon_from_Propylaea.jpg",
+                    "https://picsum.photos/640/480?random=9"
+                ],
+                description: "アテネの中心部にある小高い丘で、古代ギリシャの代表的な建築物であるパルテノン神殿などが建ち並びます。民主主義発祥の地としても知られています。"
+            },
+            {
+                name: "モン・サン＝ミシェル",
+                country: "フランス",
+                imageUrls: [
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Mont_Saint-Michel_at_dawn.jpg/640px-Mont_Saint-Michel_at_dawn.jpg",
+                    "https://picsum.photos/640/480?random=10"
+                ],
+                description: "フランス北西部の海岸に浮かぶ岩山に築かれた修道院。潮の満ち引きによって陸と隔絶される神秘的な景観は、「西洋の驚異」と称されます。"
+            },
+            {
+                name: "シドニー・オペラハウス",
+                country: "オーストラリア",
+                imageUrls: [
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Sydney_Opera_House_-_Dec_2008.jpg/640px-Sydney_Opera_House_-_Dec_2008.jpg",
+                    "https://picsum.photos/640/480?random=11"
+                ],
+                description: "シドニーの象徴的な建造物であり、20世紀を代表する建築物の一つ。貝殻のような独特の屋根が特徴で、世界的に有名なコンサートホールです。"
+            },
+            {
+                name: "古都京都の文化財",
+                country: "日本",
+                imageUrls: [
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Kinkaku-ji_in_Kyoto.jpg/640px-Kinkaku-ji_in_Kyoto.jpg",
+                    "https://picsum.photos/640/480?random=12"
+                ],
+                description: "古くから日本の首都として栄えた京都には、金閣寺や清水寺など、数多くの歴史的建造物や庭園が残されています。日本の伝統文化の粋を集めた場所です。"
+            }
         ];
 
+        // ゲーム設定
         const QUIZ_LIMIT = 10;
         let currentQuestionCount = 0;
         let availableHeritageIndices = [];
         let currentHeritage = null;
         let correctAnswers = 0;
 
-        // 配列をシャッフルするユーティリティ関数
+        // 配列をシャッフルする関数
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [array[i], array[j]] = [array[j], array[i]];
             }
+        }
+
+        // プログレスバーを更新
+        function updateProgress() {
+            const progress = (currentQuestionCount / QUIZ_LIMIT) * 100;
+            progressFill.style.width = `${progress}%`;
         }
 
         // ランダムな世界遺産を取得（選択肢生成用）
@@ -303,13 +570,16 @@
             correctAnswers = 0;
             availableHeritageIndices = Array.from({ length: worldHeritageData.length }, (_, i) => i);
             shuffleArray(availableHeritageIndices);
+            updateProgress();
             generateQuestion();
         }
 
         // 次の世界遺産を取得
         function getNextHeritage() {
             if (availableHeritageIndices.length === 0) {
-                return null;
+                // 全て使い切った場合、再度シャッフル
+                availableHeritageIndices = Array.from({ length: worldHeritageData.length }, (_, i) => i);
+                shuffleArray(availableHeritageIndices);
             }
             const nextIndex = availableHeritageIndices.pop();
             return worldHeritageData[nextIndex];
@@ -329,14 +599,13 @@
             return choices;
         }
 
-        // 画像を読み込む関数（複数のURLを試す）
+        // 画像を読み込む関数（フォールバック付き）
         function loadImageWithFallback(imageUrls, imageElement) {
             let currentIndex = 0;
             
             function tryLoadImage() {
                 if (currentIndex >= imageUrls.length) {
-                    // 全てのURLが失敗した場合、プレースホルダー画像を表示
-                    imageElement.src = 'https://via.placeholder.com/640x480/0056b3/ffffff?text=世界遺産';
+                    imageElement.src = 'https://via.placeholder.com/640x480/667eea/ffffff?text=世界遺産';
                     imageElement.alt = '画像を読み込めませんでした';
                     return;
                 }
